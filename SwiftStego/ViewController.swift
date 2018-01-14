@@ -14,11 +14,11 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     
-    if let encodedImage = Encoder().encode(image: #imageLiteral(resourceName: "ExampleImage"), data: "Test") {
+    if let encodedImage = Encoder().encode(image: #imageLiteral(resourceName: "doge"), data: "find jeans sausage local tide eagle inhale mixed dizzy memory destroy hurry\0") {
       if let data = Decoder().decode(image: encodedImage) {
         print(data)
       } else {
-        print("Failed to decode")
+          print("Failed to decode")
       }
     } else {
       print("Failed to encode")
