@@ -13,6 +13,14 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    Encoder(dataToHide: "Test").encode(image: #imageLiteral(resourceName: "ExampleImage"), data: "Test") { (result) in
+      switch result {
+      case .success(let image):
+        print(Decoder().decode(image: image))
+      case .failure:
+        break
+      }
+    }
   }
 
   override func didReceiveMemoryWarning() {

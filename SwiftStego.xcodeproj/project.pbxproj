@@ -12,6 +12,11 @@
 		D3166518200AAD0F001173C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3166516200AAD0F001173C7 /* Main.storyboard */; };
 		D316651A200AAD0F001173C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3166519200AAD0F001173C7 /* Assets.xcassets */; };
 		D316651D200AAD0F001173C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D316651B200AAD0F001173C7 /* LaunchScreen.storyboard */; };
+		D3166525200AAD5C001173C7 /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3166524200AAD5C001173C7 /* Encoder.swift */; };
+		D3166527200AAEB7001173C7 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3166526200AAEB7001173C7 /* Result.swift */; };
+		D3166529200AAFAE001173C7 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3166528200AAFAE001173C7 /* Defaults.swift */; };
+		D316652B200ABB63001173C7 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D316652A200ABB63001173C7 /* Utilities.swift */; };
+		D316652D200ADEC9001173C7 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D316652C200ADEC9001173C7 /* Decoder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +27,11 @@
 		D3166519200AAD0F001173C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D316651C200AAD0F001173C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D316651E200AAD0F001173C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3166524200AAD5C001173C7 /* Encoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
+		D3166526200AAEB7001173C7 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		D3166528200AAFAE001173C7 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
+		D316652A200ABB63001173C7 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		D316652C200ADEC9001173C7 /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +70,11 @@
 				D3166519200AAD0F001173C7 /* Assets.xcassets */,
 				D316651B200AAD0F001173C7 /* LaunchScreen.storyboard */,
 				D316651E200AAD0F001173C7 /* Info.plist */,
+				D3166526200AAEB7001173C7 /* Result.swift */,
+				D3166528200AAFAE001173C7 /* Defaults.swift */,
+				D316652A200ABB63001173C7 /* Utilities.swift */,
+				D3166524200AAD5C001173C7 /* Encoder.swift */,
+				D316652C200ADEC9001173C7 /* Decoder.swift */,
 			);
 			path = SwiftStego;
 			sourceTree = "<group>";
@@ -136,8 +151,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D316652B200ABB63001173C7 /* Utilities.swift in Sources */,
 				D3166515200AAD0F001173C7 /* ViewController.swift in Sources */,
 				D3166513200AAD0F001173C7 /* AppDelegate.swift in Sources */,
+				D3166529200AAFAE001173C7 /* Defaults.swift in Sources */,
+				D316652D200ADEC9001173C7 /* Decoder.swift in Sources */,
+				D3166527200AAEB7001173C7 /* Result.swift in Sources */,
+				D3166525200AAD5C001173C7 /* Encoder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
