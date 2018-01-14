@@ -16,16 +16,21 @@ class Decoder {
   private var step: UInt32 = 0
   private var length: UInt32 = 0
   
-  func decode(image: UIImage) -> String? {
+  public func decode(image: UIImage) -> String? {
     if hasData(in: image),
       let string = self.data,
         String(string.prefix(Defaults.dataPrefix.count)) == Defaults.dataPrefix
-        && String(string.prefix(Defaults.dataSuffix.count)) == Defaults.dataSuffix {
+        && String(string.suffix(Defaults.dataSuffix.count)) == Defaults.dataSuffix {
       
       let endIndex = string.index(string.endIndex, offsetBy: -Defaults.dataSuffix.count)
       let startIndex = string.index(string.startIndex, offsetBy: Defaults.dataPrefix.count)
       
-      return String(string[startIndex..<endIndex])
+      if let data = Data(base64Encoded: String(string[startIndex..<endIndex])) {
+        return String(data: data, encoding: .utf8)
+      } else {
+        return nil
+      }
+      
     } else {
       return nil
     }
@@ -110,13 +115,13 @@ class Decoder {
   }
   
   private func getLength() {
-    self.length = Utilities.AddBits(number1: self.length, number2: UInt32(self.bitsCharacter), shift: Int(self.step) % Defaults.bitsPerComponent - 1)
+    self.length = Utilities.AddBits(number1: self.length, number2: UInt32(self.bitsCharacter), shift: Int(self.step) % (Defaults.bitsPerComponent - 1))
     
     self.bitsCharacter = 0
   }
   
   private func getCharacter() {
-    let character = "\(UInt(self.bitsCharacter))"
+    let character = String(format: "%c", arguments: [self.bitsCharacter])
     
     self.bitsCharacter = 0
     
@@ -130,7 +135,7 @@ class Decoder {
   private func hasData() -> Bool {
     return (self.data?.count ?? 0) > 0
     && String(self.data?.prefix(Defaults.dataPrefix.count) ?? "") == Defaults.dataPrefix
-    && String(self.data?.suffix(Defaults.dataPrefix.count) ?? "") == Defaults.dataPrefix
+    && String(self.data?.suffix(Defaults.dataSuffix.count) ?? "") == Defaults.dataSuffix
   }
   
   private func reset() {

@@ -13,14 +13,10 @@ class Encoder {
   private var currentShift: Int = Defaults.initalShift
   private var currentCharacter: Int = 0
   private var step: UInt32 = 0
-  private var dataToHide: String
+  private var dataToHide: NSString = ""
   
-  init(dataToHide: String) {
-    self.dataToHide = dataToHide
-  }
-  
-  func encode(image: UIImage, data: String, completion: (Result<UIImage>) -> Void) {
-    guard let cgImage = image.cgImage else { return }
+  func encode(image: UIImage, data: String) -> UIImage? {
+    guard let cgImage = image.cgImage else { return nil }
     let width = cgImage.width
     let height = cgImage.height
     let size = width * height
@@ -34,14 +30,15 @@ class Encoder {
       let bitmapInfo: CGBitmapInfo = [CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue), CGBitmapInfo.byteOrder32Big]
       
       
-      guard let context = CGContext(data: pixels, width: width, height: height, bitsPerComponent: Defaults.bitsPerComponent, bytesPerRow: Defaults.bytesPerPixel * width, space: colorSpace, bitmapInfo: bitmapInfo.rawValue) else { return }
+      guard let context = CGContext(data: pixels, width: width, height: height, bitsPerComponent: Defaults.bitsPerComponent, bytesPerRow: Defaults.bytesPerPixel * width, space: colorSpace, bitmapInfo: bitmapInfo.rawValue) else { return nil }
       
       context.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
 
-      guard let pixelPointer = pixels else { return completion(.failure(NSError())) }
+      guard let pixelPointer = pixels else { return nil }
       
-      let pixelArray = Array(UnsafeBufferPointer(start: pixelPointer.assumingMemoryBound(to: UInt32.self), count: size))
-      let error = self.hideData(data: data, in: pixelArray, pointer: pixelPointer)
+      
+      let pixelArray = pixelPointer.bindMemory(to: UInt32.self, capacity: size)
+      let error = self.hideData(data: data, in: pixelArray, size: size)
       
       if error == nil, let newImage = context.makeImage(){
         processedImage = UIImage(cgImage: newImage)
@@ -56,53 +53,46 @@ class Encoder {
       
     }
     
-    
-    if let processedImage = processedImage {
-      completion(Result.success(processedImage))
-    } else {
-      completion(Result.failure(NSError()))
-    }
+    return processedImage
   }
   
-  private func hideData(data: String, in pixels: [UInt32], pointer: UnsafeMutableRawPointer) -> Error? {
+  private func hideData(data: String, in pixels: UnsafeMutablePointer<UInt32>, size: Int) -> Error? {
     var success = false
     guard let message = messageToHide(string: data) else { return NSError() } // TODO: return better error
-    var length = message.count
+    var length = message.length
     
-    if length <= INT_MAX && (length * Defaults.bitsPerComponent) < (pixels.count - Defaults.sizeOfInfoLength) {
+    if length <= INT_MAX && (length * Defaults.bitsPerComponent) < (size - Defaults.sizeOfInfoLength) {
       reset()
       
       let data = NSData(bytes: &length, length: Defaults.bytesOfLength)
-      let lengthDataInfo = String(data: data as Data, encoding: .ascii) ?? ""
+      
+      let lengthDataInfo = NSString(data: data as Data, encoding: String.Encoding.ascii.rawValue) ?? ""
       
       var pixelPosition: Int = 0
       
       self.dataToHide = lengthDataInfo
       
-      var newPixels = pixels
-      
       while pixelPosition < Defaults.sizeOfInfoLength {
-        newPixels[pixelPosition] = self.newPixel(pixel: newPixels[pixelPosition])
+        pixels[pixelPosition] = self.newPixel(pixel: pixels[pixelPosition])
         pixelPosition += 1
       }
       
       reset()
       
-      let pixelsToHide = message.count * Defaults.bitsPerComponent
+      let pixelsToHide = message.length * Defaults.bitsPerComponent
       
       self.dataToHide = message
       
-      let ratio = (pixels.count - pixelPosition) / pixelsToHide
+      let ratio = (size - pixelPosition) / pixelsToHide
       
       let salt = ratio
       
-      while pixelPosition <= pixels.count {
-        newPixels[pixelPosition] = self.newPixel(pixel: self.newPixel(pixel: newPixels[pixelPosition]))
+      while pixelPosition <= size {
+        pixels[pixelPosition] = self.newPixel(pixel: pixels[pixelPosition])
         pixelPosition += salt
       }
       
       
-      pointer.copyBytes(from: &newPixels, count: newPixels.count)
       success = true
     } else {
       
@@ -117,8 +107,8 @@ class Encoder {
   }
   
   private func newColor(color: UInt32) -> UInt32 {
-    if let index = self.dataToHide.index(dataToHide.startIndex, offsetBy: currentCharacter, limitedBy: dataToHide.index(before: dataToHide.endIndex)) {
-      let asciiCode = UInt32(String(self.dataToHide[index])) ?? 0
+    if self.dataToHide.length > self.currentCharacter {
+      let asciiCode = UInt32(self.dataToHide.character(at: self.currentCharacter))
       let shiftedBits = asciiCode >> self.currentShift
       
       if currentShift == 0 {
@@ -139,9 +129,9 @@ class Encoder {
     self.currentCharacter = 0
   }
   
-  private func messageToHide(string: String) -> String? {
+  private func messageToHide(string: String) -> NSString? {
     let data = string.data(using: .utf8)
     guard let base64String = data?.base64EncodedString() else { return nil }
-    return "\(Defaults.dataPrefix)\(base64String)\(Defaults.dataSuffix)"
+    return NSString(format: "%@%@%@", Defaults.dataPrefix, base64String, Defaults.dataSuffix)
   }
 }
