@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'SwiftStego_Example' do
+  pod 'SwiftStego', :path => '../'
+
+  target 'SwiftStego_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
