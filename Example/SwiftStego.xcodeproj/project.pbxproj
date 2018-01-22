@@ -28,7 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0E912464C6BA2C1C7F2D0A07 /* SwiftStego.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = SwiftStego.podspec; path = ../SwiftStego.podspec; sourceTree = "<group>"; };
+		0E912464C6BA2C1C7F2D0A07 /* SwiftStego.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SwiftStego.podspec; path = ../SwiftStego.podspec; sourceTree = "<group>"; };
 		3A0D72BC076A3E7047802740 /* Pods-SwiftStego_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftStego_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftStego_Tests/Pods-SwiftStego_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		3C808ED6CF657EE6431FCFE0 /* Pods_SwiftStego_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftStego_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C3446B0E124A82ED88B22A8 /* Pods_SwiftStego_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftStego_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,10 +43,10 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		66607BF755587E16BD62668D /* Pods-SwiftStego_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftStego_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftStego_Example/Pods-SwiftStego_Example.release.xcconfig"; sourceTree = "<group>"; };
-		815DD975D67719D2118E4B19 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		815DD975D67719D2118E4B19 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		D3440CD25417763690862723 /* Pods-SwiftStego_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftStego_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftStego_Example/Pods-SwiftStego_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		E353585EFA75DF1CB35D2870 /* Pods-SwiftStego_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftStego_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftStego_Tests/Pods-SwiftStego_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		F75FC0B126FDB7BDD728789E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		F75FC0B126FDB7BDD728789E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,10 +215,12 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = P3XRP6EUV6;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = P3XRP6EUV6;
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -517,6 +519,7 @@
 			baseConfigurationReference = D3440CD25417763690862723 /* Pods-SwiftStego_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = P3XRP6EUV6;
 				INFOPLIST_FILE = SwiftStego/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -532,6 +535,7 @@
 			baseConfigurationReference = 66607BF755587E16BD62668D /* Pods-SwiftStego_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = P3XRP6EUV6;
 				INFOPLIST_FILE = SwiftStego/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -546,6 +550,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E353585EFA75DF1CB35D2870 /* Pods-SwiftStego_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = P3XRP6EUV6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -567,6 +572,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3A0D72BC076A3E7047802740 /* Pods-SwiftStego_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = P3XRP6EUV6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftStego
 
 class ViewController: UIViewController {
 
